@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключаем FontAwesome для иконок -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style type="text/css">
+        .flex { display: flex; justify-content: space-around; align-items: stretch; flex-wrap: wrap }
+        .a { flex-basis: 100% ; flex: 0 10 100%; background-color: mediumpurple; margin-bottom: 10px; text-align: center; color: white; height: 70px; font-size: 0.5cm;}
+        .b { flex-basis: 200px; flex: 0 1 33%; background-color: #efefef; margin-top: 10px}
+/*        .b img:hover { width:57%; margin-bottom:13px }*/
+        .k { width: 120px; height: 70px; border-radius: 10px; border-color: black; margin-left: 5px; margin-right: 5px; margin-bottom: 20px; margin-top: 5px; background-color: #fff; }
+
+        .k:hover { #width: 132px; #height: 77px; #margin-left: 0px; #margin-right: 0px; #margin-top: 0px; background-color: yellow; border-color: lightyellow; color: darkolivegreen; #margin-bottom: 0px; }
+
+        .l { width: 96%; height: 50px; border-radius: 2px; border-color: #c0c0c0; margin-left: 10px; margin-right: 10px; background-color: lightgreen; border-color: lightskyblue;}
+        .a b { font-size: 0.75cm; }
+
+        header {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-top: 10px;
+            font-size: 2.5rem;
+        }
+
+        nav {
+            flex: 1;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2px;
+            flex-direction: row;
+        }
+
+        nav ul {
+            list-style: none;
+            flex-direction: row;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+/*z*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding: 20px;
+/*    max-width: 1200px;*/
+    margin: 0 auto;
+}
+/*z*/
+        .menu-button {
+/*            position: fixed;*/
+            display: inline-block;
+            padding: 9px;
+            width: 65px;
+            background-color: #ddd;
+            color: white;
+            cursor: pointer;
+            font-size: 30px;
+            border-radius: 5px;
+            margin-left: 90%;
+            z-index: 1000;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background-color: #fff;
+            transition: left 0.3s ease-in-out;
+            z-index: 101;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 70px;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 15px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #aaa;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 100;
+        }
+
+        .menu-toggle:checked ~ .sidebar {
+            right: 0;
+        }
+
+        .menu-toggle:checked ~ .overlay {
+            display: block;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        b {
+            font-size: 1.3cm;
+        }
+
+        .z {
+            width: 60%;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 0px;
+            height: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 8px;
+            animation: fill-bar linear forwards infinite;
+        }
+
+        .progress.purple {
+            background-color: mediumpurple;
+            animation-duration: 10s;
+        }
+
+        .progress.pink {
+            background-color: pink;
+            animation-duration: 4s;
+        }
+
+        .progress.yellow {
+            background-color: yellow;
+            animation-duration: 3s;
+        }
+
+        .progress.lightgreen {
+            background-color: lightgreen;
+            animation-duration: 2s;
+        }
+
+        .progress.lightblue {
+            background-color: lightblue;
+            animation-duration: 1s;
+        }
+
+        @keyframes fill-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .menu-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+        }
+
+        .menu-link:hover {
+            background-color: #ccc;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ddd;
+        }
+
+        .menu-item:hover > .submenu {
+            display: block;
+        }
+
+        .submenu-item {
+            display: block;
+        }
+/*        сурет*/
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.image-item {
+    position: relative;
+    width: calc(33% - 10px); /* 3 колонки */
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden; /* Обеспечивает, чтобы изображение не выходило за пределы контейнера */
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    opacity: 0.5; /* Прозрачность 50% по умолчанию */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Плавные эффекты */
+    border-radius: 8px;
+}
+
+.image-item:hover img {
+    opacity: 1; /* При ховере изображение становится полностью непрозрачным */
+    transform: scale(1.05); /* Увеличение изображения при наведении */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    color: white;
+    opacity: 0; /* Скрыто по умолчанию */
+    display: flex;
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    justify-content: space-between;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.image-item:hover .overlay {
+    opacity: 1; /* Показываем при ховере */
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dots {
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end; /* Помещаем точки справа */
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+
+
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            nav ul {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .b {
+                flex-basis: 100%;
+                margin: 10px 0;
+            }
+
+            .progress-bar {
+                height: 10px;
+            }
+
+            .menu-button {
+                margin-left: 0;
+                font-size: 40px;
+            }
+
+            .sidebar {
+                width: 300px;
+            }
+
+            .z {
+                width: 80%;
+            }
+
+            .image-container img {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .k {
+                width: 100%;
+                height: 50px;
+            }
+
+            .l {
+                width: 100%;
+                height: 40px;
+            }
+        }
+
+        /* Для мобильных устройств */
+        @media (max-width: 480px) {
+/*            header h1 {*/
+                font-size: 1.8rem;
+            }
+
+            .a {
+                font-size: 0.4cm;
+            }
+
+            .b h3 {
+                font-size: 1.2rem;
+            }
+
+            .k {
+                width: 90%;
+                height: 45px;
+            }
+        }
+/*        поделиться*/
+.container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Круглая кнопка для поделиться */
+        .share-circle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #3b5998;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .share-circle:hover {
+            background-color: #4e74b5;
+        }
+
+        /* Контейнер для иконок, скрытый по умолчанию */
+        .share-options {
+            position: absolute;
+            bottom: 70px; /* Уменьшено расстояние */
+            right: 0;
+            display: flex;
+            flex-direction: row; /* Горизонтальное расположение иконок */
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Иконки поделиться */
+        .share-option {
+            width: 40px;
+            height: 40px;
+            background-color: #3b5998;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px; /* Уменьшено расстояние между иконками */
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        .share-option:hover {
+            background-color: #4e74b5;
+            transform: scale(1.2); /* Увеличение размера при ховере */
+        }
+
+        /* При наведении на круг, иконки становятся видимыми */
+        .share-circle:hover .share-options {
+            visibility: visible;
+            opacity: 1;
+        }
+/*        футер*/
+footer {
+    margin-top: 30px;
+    background-color: floralwhite;
+    color: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+footer section {
+    margin-bottom: 20px;
+}
+
+footer ul {
+    list-style: none;
+}
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer ul li a {
+    color: #000;
+    text-decoration: none;
+}
+
+footer form {
+    margin-top: 10px;
+}
+
+footer input[type="email"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+footer button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 3px;
+}
+
+footer button:hover {
+    background-color: whitesmoke;
+}
+    </style>
+    <title></title>
+</head>
+<body>
+    <header>
+        <h1>MANGA KZ</h1>
+        <label for="menuToggle" class="menu-button"><center>≡</center></label>
+                <input type="checkbox" id="menuToggle" class="menu-toggle">
+                <div class="sidebar">
+                    <ul>
+                        <li><img src="file:///C:/Users/%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F14_20241201213256.png" width="100"><b>ANGA</b></li>
+                        <hr>
+                        <li><a href="#">ANIMELER</a></li>
+                        <li><a href="#">MANGALAR</a></li>
+                        <li><a href="#">OINGOINGTAR</a></li>
+                    </ul>
+                </div>
+                <div class="overlay" onclick="document.getElementById('menuToggle').checked = false;"></div>
+        
+    </header>
+    <nav>
+            <ul>
+                <li><a href="#">Басты бет</a></li>
+                <li><a href="#">Жаңалықтар</a></li>
+                <li class="menu-item">
+                   <a href="#" class="menu-link">...</a>
+                   <ul class="submenu">
+                       <li class="submenu-item"><a href="#" class="menu-link">Жаңа Анимелер</a></li>
+                        <li class="submenu-item"><a href="#" class="menu-link">Байланыстар</a></li>
+                        <li class="submenu-item"><a href="#" class="menu-link" style="background-color: darkred; color: white;">Шығу</a></li>
+                    </ul>
+                </li>
+                <!-- <li> -->
+                <!-- <label for="menuToggle" class="menu-button"><center>≡</center></label> -->
+                <!-- <input type="checkbox" id="menuToggle" class="menu-toggle"> -->
+                <!-- <div class="sidebar"> -->
+                    <!-- <ul> -->
+                        <!-- <li><img src="file:///C:/Users/%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F14_20241201213256.png" width="100"><b>ANGA</b></li> -->
+                        <!-- <hr> -->
+                        <!-- <li><a href="#">ANIMELER</a></li> -->
+                        <!-- <li><a href="#">MANGALAR</a></li> -->
+                        <!-- <li><a href="#">OINGOINGTAR</a></li> -->
+                    </ul>
+                <!-- </div> -->
+                <!-- <div class="overlay" onclick="document.getElementById('menuToggle').checked = false;"></div> -->
+                <!-- </li> -->
+            </ul>
+        </nav>
+    <section>
+        <div class="progress-bar">
+            <div class="progress purple" style="width: 10%;"></div>
+        </div>
+    </section>
+
+    <div class="flex">
+        <div class="b">
+            <h3>BLUE LOCK</h3>
+            <center><img class="z" src="https://i.pinimg.com/originals/e0/ce/fb/e0cefb2e6edb00eec463d9269b2f2c03.jpg"></center>
+            <p> 
+                2024 жылдың шілдесіне қарай манга бүкіл әлемде айналымда 40 миллионнан астам дана болды, бұл оны барлық уақыттағы ең көп сатылатын манга серияларының біріне айналдырды. 2021 жылы Blue Lock shōnen номинациясында 45-ші Коданша Манга сыйлығын жеңіп алды.
+            </p>
+        </div>
+
+        <div class="b">
+            <h3>BLUE BOX</h3>
+            <p>
+                Коуджи Миура жазған және суреттеген жапон манга сериясы. Ол 2021 жылдың сәуір айынан бастап Шуэйша апталық Shōnen Jump-та серияланды, оның тараулары 2024 жылдың қазан айындағы жағдай бойынша 17 танкобон көлемінде жиналды.
+            </p>
+            <center><img src="https://avatars.mds.yandex.net/i?id=77b8fcc0afdd99873b3c630e69a457d1_l-10502494-images-thumbs&n=13" class="z"></center>
+        </div>
+
+        <div class="b">
+            <br><center><a href="#"><button class="k">1-ТОМ</button><button class="k">2-ТОМ</button><button class="k">3-ТОМ</button><button class="k">4-ТОМ</button></a></center>
+            <br><button class="l">ОҚУ</button>
+            <p>
+                Tacos шын мәнінде микродозалау, құйылатын семиотика banjo chicharrones ретро фанни пакеті Портленд күнделікті тасымалдайтын винил жазу машинкасы.
+            </p>
+        </div>
+    </div>
+    
+    <div class="a">
+        <b>БАСҚА АНИМЕЛЕР</b>
+    </div>
+    
+<div class="image-container">
+    <div class="image-item">
+        <img src="https://m.media-amazon.com/images/M/MV5BOWZkM2NhNTMtNDIxNS00M2FjLWI3ZWEtOTViMDQxMDdkOTY5XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="ван пис">
+        <div class="overlay">
+            <div class="title">Ван Пис</div>
+            <div class="dots">...</div>
+            <div class="description">Это аниме о приключениях пиратов.</div>
+        </div>
+    </div>
+    <div class="image-item">
+        <img src="https://i.ytimg.com/vi/cviSkancjLY/maxresdefault.jpg" alt="клинок рассекающий демонов">
+        <div class="overlay">
+            <div class="title">Клинок Рассекающий Демонов</div>
+            <div class="dots">...</div>
+            <div class="description">История о демонах и охотниках на демонов.</div>
+        </div>
+    </div>
+    <div class="image-item">
+        <img src="https://talkvio.com/file/4673/68234" alt="Магическая битва">
+        <div class="overlay">
+            <div class="title">Магическая Битва</div>
+            <div class="dots">...</div>
+            <div class="description">Магия, боевые искусства и удивительные события.</div>
+        </div>
+    </div>
+    <div class="image-item">
+        <img src="https://sun9-57.userapi.com/s/v1/ig2/Y9QNdSqdQHhb-bKftccIvGR5MvEGjAIs1vWAdL3X4SUdFT7wcYmeZ2Ou2jmJ3LhwfQLvnE5ObKyJtUHeG2yYq6iK.jpg?quality=95&as=32x24,48x36,72x54,108x81,160x120,240x180,360x270,480x360,540x405,640x480,720x540,1080x810,1280x960,1440x1080,2048x1536&from=bu&u=mUTmK7qP48Wnei8uRQDY2Qt_JGL8fLVAcl5TtmCi6BE&cs=807x605" alt="ходячий замок">
+        <div class="overlay">
+            <div class="title">Ходячий Замок</div>
+            <div class="dots">...</div>
+            <div class="description">Фильм о магии, любви и приключениях.</div>
+        </div>
+    </div>
+    <div class="image-item">
+        <img src="https://i.pinimg.com/originals/96/67/8b/96678b67764e7200531e08ec453bf8ba.jpg" alt="твоя апрельская ложь">
+        <div class="overlay">
+            <div class="title">Твоя Апрельская Ложь</div>
+            <div class="dots">...</div>
+            <div class="description">Трогательная история любви и музыки.</div>
+        </div>
+    </div>
+    <div class="image-item">
+        <img src="https://i.pinimg.com/originals/cd/50/e9/cd50e9aba8458193dcb5fb1bc533d539.jpg" alt="унесенные призраками">
+        <div class="overlay">
+            <div class="title">Унесенные Призраками</div>
+            <div class="dots">...</div>
+            <div class="description">Фантастическая история о девушке и духах.</div>
+        </div>
+    </div>
+</div>
+
+    <div class="share-circle">
+        <span>+</span> <!-- Можно заменить на иконку или текст -->
+        <div class="share-options">
+            <!-- Используем иконки FontAwesome для социальных сетей -->
+            <div class="share-option" title="Facebook"><i class="fab fa-facebook-f"></i></div>
+            <div class="share-option" title="Twitter"><i class="fab fa-twitter"></i></div>
+            <div class="share-option" title="Instagram"><i class="fab fa-instagram"></i></div>
+            <div class="share-option" title="LinkedIn"><i class="fab fa-linkedin-in"></i></div>
+        </div>
+    </div>
+    <!-- футер -->
+    <footer>
+        <section>
+            <h4>Байланыс арналары</h4>
+            <p>Email: contact@newswebsite.com</p>
+            <p>Байланыс нөмірі: +7 777 123 4567</p>
+            <p>Біздің әлеуметтік желілер:</p>
+            <ul>
+                <li><a href="#">Telegram</a></li>
+                <li><a href="#">You Tube</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </section>
+
+
+
+        <p>&copy; 2024 Жаңалықтар. Барлық құқықтар қорғалған.</p>
+    </footer>
+</body>
+</html>
